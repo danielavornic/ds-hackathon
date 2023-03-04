@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Formik } from "formik";
+import { useRouter } from "next/router";
 
 import { Layout } from "@/components";
 
 const signup = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
+
   return (
     <Layout title="Sign up">
       <section className=" dark:bg-gray-900 md:h-[calc(100vh-120px)]">
@@ -31,6 +35,7 @@ const signup = () => {
                 onSubmit={(values, { setSubmitting }) => {
                   console.log(values);
                   setSubmitting(false);
+                  router.push("/welcome");
                 }}
               >
                 {({ values, handleChange, handleSubmit, isSubmitting }) => (
