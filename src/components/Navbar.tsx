@@ -7,11 +7,6 @@ const menuItems = [
     name: "About",
     href: "/about",
   },
-  {
-    name: "Sign in",
-    href: "/signin",
-    className: "btn btn-primary btn-outline text-base mr-2 ml-1",
-  },
 ];
 
 export const Navbar = () => {
@@ -44,9 +39,7 @@ export const Navbar = () => {
           <ul className="hidden lg:flex menu menu-horizontal px-1">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className={item.className}>
-                  {item.name}
-                </Link>
+                <Link href={item.href}>{item.name}</Link>
               </li>
             ))}
           </ul>
@@ -88,9 +81,14 @@ export const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link href="/signup" className="btn btn-primary text-base">
-              Sign up
-            </Link>
+            <div className="flex">
+              <Link href="/signin" className="btn btn-outline btn-primary mr-2 text-base">
+                Sign in
+              </Link>
+              <Link href="/signup" className="btn btn-primary text-base">
+                Sign up
+              </Link>
+            </div>
           )}
         </div>
       </header>
