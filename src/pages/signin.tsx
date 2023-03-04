@@ -1,8 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Formik } from "formik";
+import * as Yup from "yup";
 
 import { Layout } from "@/components";
+
+const SigninSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email address").required("Required"),
+  password: Yup.string().required("Required"),
+  remember: Yup.boolean(),
+});
 
 const signin = () => {
   return (
@@ -32,8 +39,17 @@ const signin = () => {
                   console.log(values);
                   setSubmitting(false);
                 }}
+                validationSchema={SigninSchema}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting }) => (
+                {({
+                  values,
+                  handleChange,
+                  handleSubmit,
+                  isSubmitting,
+                  errors,
+                  touched,
+                  handleBlur,
+                }) => (
                   <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                     <div>
                       <label
@@ -46,12 +62,18 @@ const signin = () => {
                         type="email"
                         name="email"
                         id="email"
-                        className="input input-bordered w-full"
+                        className={`input input-bordered w-full ${
+                          touched.email && errors.email ? "input-error" : ""
+                        }`}
                         placeholder="name@company.com"
-                        required
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         value={values.email}
+                        required
                       />
+                      {touched.email && errors.email ? (
+                        <div className="text-xs text-red-600 mt-1">{errors.email}</div>
+                      ) : null}
                     </div>
                     <div>
                       <label
@@ -64,12 +86,18 @@ const signin = () => {
                         type="password"
                         name="password"
                         id="password"
+                        className={`input input-bordered w-full ${
+                          touched.password && errors.password ? "input-error" : ""
+                        }`}
                         placeholder="••••••••"
-                        className="input input-bordered w-full"
-                        required
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         value={values.password}
+                        required
                       />
+                      {touched.password && errors.password ? (
+                        <div className="text-xs text-red-600 mt-1">{errors.password}</div>
+                      ) : null}
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-start">
@@ -78,7 +106,7 @@ const signin = () => {
                             id="remember"
                             aria-describedby="remember"
                             type="checkbox"
-                            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                            className="checkbox w-4 h-4 rounded-sm"
                             onChange={handleChange}
                             checked={values.remember}
                           />

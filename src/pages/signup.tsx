@@ -2,12 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
+import * as Yup from "yup";
 
 import { Layout } from "@/components";
 
 const signup = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email address").required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null as any], "Passwords must match")
+      .required("Confirm password is required"),
+  });
 
   return (
     <Layout title="Sign up">
@@ -33,12 +44,21 @@ const signup = () => {
               <Formik
                 initialValues={{ email: "", password: "", confirmPassword: "" }}
                 onSubmit={(values, { setSubmitting }) => {
-                  console.log(values);
+                  // console.log(values);
                   setSubmitting(false);
                   router.push("/welcome");
                 }}
+                validationSchema={validationSchema}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting }) => (
+                {({
+                  values,
+                  handleChange,
+                  handleSubmit,
+                  isSubmitting,
+                  errors,
+                  touched,
+                  handleBlur,
+                }) => (
                   <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                     <div>
                       <label
@@ -51,12 +71,18 @@ const signup = () => {
                         type="email"
                         name="email"
                         id="email"
-                        className="input input-bordered w-full"
+                        className={`input input-bordered w-full ${
+                          touched.email && errors.email ? "input-error" : ""
+                        }`}
                         placeholder="name@company.com"
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         value={values.email}
                         required
                       />
+                      {touched.email && errors.email ? (
+                        <div className="text-xs text-red-600 mt-1">{errors.email}</div>
+                      ) : null}
                     </div>
                     <div>
                       <label
@@ -70,11 +96,17 @@ const signup = () => {
                         name="password"
                         id="password"
                         placeholder="••••••••"
-                        className="input input-bordered w-full"
+                        className={`input input-bordered w-full ${
+                          touched.password && errors.password ? "input-error" : ""
+                        }`}
                         required
                         value={values.password}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
+                      {touched.password && errors.password ? (
+                        <div className="text-xs text-red-600 mt-1">{errors.password}</div>
+                      ) : null}
                     </div>
                     <div>
                       <label
@@ -88,10 +120,13 @@ const signup = () => {
                         name="confirmPassword"
                         id="confirmPassword"
                         placeholder="••••••••"
-                        className="input input-bordered w-full"
+                        className={`input input-bordered w-full ${
+                          touched.confirmPassword && errors.confirmPassword ? "input-error" : ""
+                        }`}
                         required
                         value={values.confirmPassword}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                     </div>
                     <button
