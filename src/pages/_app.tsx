@@ -1,12 +1,15 @@
-import { FormProvider, TripProvider } from "@/context";
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+
+import { FormProvider, TripProvider, UserProvider } from "@/context";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <FormProvider>
       <TripProvider>
-        <Component {...pageProps} />
+        <UserProvider>
+          <Component {...pageProps} />
+        </UserProvider>
       </TripProvider>
     </FormProvider>
   );
