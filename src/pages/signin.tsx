@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -12,6 +14,8 @@ const SigninSchema = Yup.object().shape({
 });
 
 const signin = () => {
+  const router = useRouter();
+
   return (
     <Layout title="Sign in">
       <section className=" dark:bg-gray-900 md:h-[calc(100vh-120px)]">
@@ -38,6 +42,7 @@ const signin = () => {
                 onSubmit={(values, { setSubmitting }) => {
                   console.log(values);
                   setSubmitting(false);
+                  router.push({ pathname: "/trip", query: { tab: "profile" } });
                 }}
                 validationSchema={SigninSchema}
               >
