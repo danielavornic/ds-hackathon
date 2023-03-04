@@ -44,28 +44,30 @@ export const MapC = () => {
       style={{ width: width, height: "100vh", float: "right" }}
       onMove={(e) => setViewstate(e.viewState)}
     >
-      {recommendedLocations.map((location) => (
-        <Marker key={location.title} latitude={location.lat} longitude={location.long}>
-          <button
-            className="marker-btn"
-            onClick={(event) => {
-              event.preventDefault();
-              selectLocation(location);
-            }}
-          >
-            <img
-              src="/images/marker.svg"
-              alt="location Marker"
-              className={cn({
-                "opacity-50": !selectedLocation?.id || selectedLocation.id !== location.id,
-              })}
-              width="40"
-            />
-          </button>
-        </Marker>
-      ))}
+      {recommendedLocations
+        .filter((location) => !locations.find((l) => l.id === location.id))
+        .map((location) => (
+          <Marker key={location.title} latitude={location.lat} longitude={location.long}>
+            <button
+              className="marker-btn"
+              onClick={(event) => {
+                event.preventDefault();
+                selectLocation(location);
+              }}
+            >
+              <img
+                src="/images/marker.svg"
+                alt="location Marker"
+                className={cn({
+                  "opacity-50": !selectedLocation?.id || selectedLocation.id !== location.id,
+                })}
+                width="40"
+              />
+            </button>
+          </Marker>
+        ))}
 
-      {locations.map((location) => (
+      {locations.map((location, index) => (
         <Marker key={location.title} latitude={location.lat} longitude={location.long}>
           <button
             className="marker-btn"
@@ -74,6 +76,9 @@ export const MapC = () => {
               selectLocation(location);
             }}
           >
+            <div className="bg-primary text-white rounded-full absolute w-[17px] h-[17px] top-[5px] left-[12px] flex items-center justify-center">
+              <span className="text-xs font-medium">{index + 1}</span>
+            </div>
             <img src="/images/marker-green.svg" alt="location Marker" width="40" />
           </button>
         </Marker>
