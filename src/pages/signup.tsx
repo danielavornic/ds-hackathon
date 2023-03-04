@@ -11,7 +11,7 @@ const signup = () => {
         <div className="container  flex flex-col md:flex-row h-full justify-center items-center px-6 py-8 mx-auto lg:py-0">
           <div>
             <Image
-              src="/images/md-map-tilt.png"
+              src="/images/md-2-tilt.png"
               alt="Sign in"
               width="700"
               height="548"
