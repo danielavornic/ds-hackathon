@@ -12,7 +12,6 @@ interface StepProps extends HTMLAttributes<HTMLDivElement> {
 export const Step = ({ isLast, index }: StepProps) => {
   const { questions, currentStep } = useFormContext();
   const router = useRouter();
-  console.log("idx", questions[index], index, currentStep);
 
   return (
     <div

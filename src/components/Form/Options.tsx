@@ -8,7 +8,8 @@ export const Options = () => {
   const [otherValue, setOtherValue] = useState("");
 
   const question = questions[currentStep];
-  const { id, answer, type } = question;
+  const { id, type } = question;
+  const answer = question?.answer || [];
 
   const handleChange = (index: number, value: string) => {
     if (index === question.options.length) {

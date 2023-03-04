@@ -5,8 +5,11 @@
 html,
 body {
   height: 100%;
-  font-family: "Inter", sans-serif;
   overflow-x: hidden;
+}
+
+* {
+  font-family: "Inter", sans-serif;
 }
 
 .btn {
