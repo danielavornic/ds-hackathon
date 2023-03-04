@@ -43,6 +43,7 @@ export const MapC = () => {
       mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
       style={{ width: width, height: "100vh", float: "right" }}
       onMove={(e) => setViewstate(e.viewState)}
+      ref={(map) => map && map.resize()}
     >
       {recommendedLocations
         .filter((location) => !locations.find((l) => l.id === location.id))
