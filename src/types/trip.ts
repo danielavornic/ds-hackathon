@@ -8,13 +8,11 @@ export interface Trip {
 
 export interface Location {
   id: string;
-  lat: number;
-  long: number;
+  latitude: number;
+  longitude: number;
   title: string;
   description: string;
   image: string;
-  category: string;
-  tags?: string[];
   site?: string;
   phone?: string;
   address?: string;

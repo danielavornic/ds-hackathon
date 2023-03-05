@@ -23,12 +23,6 @@ const signup = () => {
       .required("Confirm password is required"),
   });
 
-  useEffect(() => {
-    if (user) {
-      router.push("/trip");
-    }
-  }, [user]);
-
   return (
     <Layout title="Sign up">
       <section className=" dark:bg-gray-900 md:h-[calc(100vh-120px)]">

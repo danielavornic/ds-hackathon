@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { useTripContext } from "@/hooks";
 import { useEffect, useState } from "react";
-import Map, { Marker } from "react-map-gl";
+import MapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import cn from "classnames";
+
 import { LocationPopup } from "./LocationPopup";
 
 const initViewport = {
@@ -28,8 +29,9 @@ export const MapC = () => {
   useEffect(() => {
     if (selectedLocation) {
       setViewstate({
-        latitude: selectedLocation.lat,
-        longitude: selectedLocation.long,
+        ...viewstate,
+        latitude: selectedLocation.latitude,
+        longitude: selectedLocation.longitude,
         zoom: viewstate.zoom > 12 ? viewstate.zoom : 12,
         transitionDuration: 1000,
       });
@@ -37,18 +39,19 @@ export const MapC = () => {
   }, [selectedLocation, isSidebarOpen]);
 
   return (
-    <Map
+    <MapGL
       {...viewstate}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle="mapbox://styles/mapbox/streets-v12"
       mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
       style={{ width: width, height: "100vh", float: "right" }}
       onMove={(e) => setViewstate(e.viewState)}
       ref={(map) => map && map.resize()}
+      transitionDuration={1000}
     >
       {recommendedLocations
         .filter((location) => !locations.find((l) => l.id === location.id))
         .map((location) => (
-          <Marker key={location.title} latitude={location.lat} longitude={location.long}>
+          <Marker key={location.title} latitude={location.latitude} longitude={location.longitude}>
             <button
               className="marker-btn"
               onClick={(event) => {
@@ -69,7 +72,7 @@ export const MapC = () => {
         ))}
 
       {locations.map((location, index) => (
-        <Marker key={location.title} latitude={location.lat} longitude={location.long}>
+        <Marker key={location.title} latitude={location.latitude} longitude={location.longitude}>
           <button
             className="marker-btn"
             onClick={(event) => {
@@ -86,6 +89,6 @@ export const MapC = () => {
       ))}
 
       {selectedLocation && <LocationPopup location={selectedLocation} />}
-    </Map>
+    </MapGL>
   );
 };

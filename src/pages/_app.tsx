@@ -5,12 +5,12 @@ import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <FormProvider>
-      <TripProvider>
+    <TripProvider>
+      <FormProvider>
         <UserProvider>
           <Component {...pageProps} />
         </UserProvider>
-      </TripProvider>
-    </FormProvider>
+      </FormProvider>
+    </TripProvider>
   );
 }

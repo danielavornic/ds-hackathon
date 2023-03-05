@@ -10,11 +10,11 @@ const form = () => {
   const router = useRouter();
   const { user } = useUserContext();
 
-  useEffect(() => {
-    if (user) {
-      router.push("/trip");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push("/trip");
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     if (currentStep >= questions.length || currentStep < 0) {

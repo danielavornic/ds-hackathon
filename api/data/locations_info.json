@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Lunca Prutului de Jos",
+    "id": "lunca_prutului",
+    "latitude": 45.6075,
+    "longitude": 28.152778,
+    "address": "Cahul",
+    "image": "",
+    "description": "The scientific reserve “Prut de Jos” is located in the meadow of the Prut River, the western part of the village Slobozia Mare. The paradise of birds, fish and plants, created to protect the flora and fauna of Beleu Lake, as well as to create favorable conditions for the breeding of rare and endangered plants. The “lower Prut” Scientific Reserve is a true museum of biodiversity, of inestimable value, for the universal natural heritage. It is a protected area that was included in the UNESCO World Biosphere Reserve Network in 2018."
+  },
+  {
+    "title": "Grota Duruitoarea Veche",
+    "id": "grota_duruitoare",
+    "latitude": 47.886245334607544,
+    "longitude": 27.27120246798375,
+    "address": "Glodeni",
+    "image": "",
+    "description": "As a result of archaeological excavations here were discovered petrifications from the ice age and remains of an ancient civilization that made it known throughout the world. We must mention that the nature, the relief of these places and the richness of historical and architectural monuments amaze even our imagination. We have to take into account that at only 12-15 km on the territory of Glodeni district is located the natural reserve “Padurea Domnească”, which is a very attractive territory for investments, especially in tourist objects."
+  },
+  {
+    "title": "Castel MIMI",
+    "id": "castel_mimi",
+    "latitude": 46.89281654918783,
+    "longitude": 29.291681130683877,
+    "address": "Bulevardul Dacia 1, Bulboaca",
+    "image": "",
+    "description": "At Castel Mimi we are proud of our position as one of the top wine producers and tourist destinations in Moldova. Listed within the top 15 most beautiful wineries in the world; we present both history and modern architecture to the 30,000 visitors who come each year from over 80 countries around the world. We invite you to come and visit the only chateau in Moldova and let us show you what makes Castel Mimi a truly unforgettable experience."
+  },
+  {
+    "title": "Epoca de Piatra",
+    "id": "epoca_de_piatra",
+    "latitude": 47.312835961244744,
+    "longitude": 28.937214607393564,
+    "address": "Branesti Winery, Branesti",
+    "image": "",
+    "description": "Branesti Cellars lie near Orheiul Vechi monastery and have 75 km of underground tunnels, 68 m below the surface. Our red and white collection wines have been awarded gold, silver and bronze at international exhibitions in Bordeaux, Sankt-Petersburg and Crimea. You are welcome to savour the wide variety of wines along with a traditional Moldovan lunch, in one of the three tasting halls, as part of our guided tour, starting as low as 6 €."
+  },
+  {
+    "title": "Orheiul Vechi",
+    "id": "orheiul_vechi",
+    "latitude": 47.317335614194704,
+    "longitude": 28.966752830683866,
+    "address": "Raionul Orhei",
+    "image": "",
+    "description": "The area of Old Orhei was declared a natural reserve during the Soviet period on 15 March 1968. This allowed for the protection and enhancement of the cultural and natural heritage of the area."
+  },
+  {
+    "title": "Conacul Manuc Bei",
+    "id": "manuc_bei",
+    "latitude": 46.82644898325353,
+    "longitude": 28.581866692606436,
+    "address": "Manor House, str. Mitropolit Varlaam 51, Hîncești 3400",
+    "image": "",
+    "description": "Built at the beginning of the 19th century, in 1816, Manuc Bei Mansion is an architectural monument located in Hancesti district of the Republic of Moldova, which has a rich history. The history of Manuc Bei Mansion begins with the merchant and diplomat Manuc-Emmanuel Mîrzoian, an Armenian of nationality, who moved from the Romanian city of Sibiu to Chisinau and bought the Hancesti estate. Even though the mansion was built by his son and nephew, it bears his name. The two built a French-style castle with a winter garden, guard towers and a huge park."
+  },
+  {
+    "title": "Saharna Monastery",
+    "id": "saharna",
+    "latitude": 47.69531214914382,
+    "longitude": 28.9654399926143,
+    "address": "Saharna",
+    "image": "",
+    "description": "Saharnas monastic complex dedicated to the Holy Trinity is located about 110 km north of Chisinau city, 8 km far from Orhei town. It is located in the one of the picturesque defiles near Saharna village, on the right abrupt bank of the Dniester River."
+  },
+  {
+    "title": "Rose Valley",
+    "id": "rose_valley",
+    "latitude": 47.002598205715984,
+    "longitude": 28.85196238465806,
+    "address": "Valea Trandafirilor streed, Chisinau",
+    "image": "",
+    "description": "The Rose Valley Park in Chisinau is one of the most popular parks in the city. Located in the Botanica-Park microdistrict, it was founded in 1968 on an area of about 145 hectares, where there was a natural forest and there was a whole plantation of roses. In the Soviet years, it was called the City Park of Culture and Leisure. Lenin. It was in honor of this rose plantation that the park received the popular name Valley of Roses."
+  },
+  {
+    "title": "House-Museum of A.S. Pushkin",
+    "id": "puskin_house",
+    "latitude": 47.032413613409005,
+    "longitude": 28.836541569316125,
+    "address": "Strada Anton Pann 19, Chisinau",
+    "image": "",
+    "description": "The great Russian poet Alexander Pushkin was exiled to Moldova from the capital of Russia for three years by tsarist administration. September 21, 1820, he arrived in Chisinau and stayed at the house of General Inzov, which today is a museum. For three years he spent in Bessarabia, Pushkin spawned a huge number of poems, Gavriliada, the first part of the famous poem Eugene Onegin and other great works now included in the world literature."
+  },
+  {
+    "title": "Little Switzerland of Moldova",
+    "id": "little_swidzerland",
+    "latitude": 48.15950805433522,
+    "longitude": 27.124409292583177,
+    "address": "Edinet",
+    "image": "",
+    "description": "The surroundings of the village of Fetești, a locality on the outskirts of Edineț, leave those who come to these places for the first time speechless. High rocks, pebbles scattered here and there and Draghishtea, the stream baptized in honor of love, make you see your country with different eyes."
+  }
+]

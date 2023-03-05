@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFormContext } from "@/hooks";
 import { Option } from "@/components";
+import { QuestionType } from "@/types";
 
 export const Options = () => {
   const { questions, setAnswer, currentStep } = useFormContext();
@@ -13,7 +14,11 @@ export const Options = () => {
 
   const handleChange = (index: number, value: string) => {
     if (index === question.options.length) {
-      return setAnswer(id, [value]);
+      if (type === "radio") {
+        return setAnswer(id, [value]);
+      }
+
+      return setAnswer(id, [...(answer || []), value]);
     }
 
     if (type === "checkbox") {
@@ -30,6 +35,19 @@ export const Options = () => {
     return setAnswer(id, [value]);
   };
 
+  useEffect(() => {
+    if (!question?.answer) {
+      setOtherValue("");
+    }
+
+    if (
+      question.options.every((option) => !answer.includes(option.value)) &&
+      question.hasCustomOption
+    ) {
+      setOtherValue(answer[0]);
+    }
+  }, [currentStep]);
+
   return (
     <div className="max-w-screen-lg mx-auto mt-10 mb-18">
       {question.options.map(({ label, value }, index) => (
@@ -40,7 +58,7 @@ export const Options = () => {
           label={label}
           value={value}
           answer={answer}
-          type={type}
+          type={type as QuestionType}
         />
       ))}
       {question.hasCustomOption && (
@@ -53,7 +71,7 @@ export const Options = () => {
           label="Other"
           value={otherValue}
           answer={answer}
-          type={type}
+          type={type as QuestionType}
           isOther
         />
       )}

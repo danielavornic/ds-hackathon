@@ -6,7 +6,7 @@ import { useTripContext } from "@/hooks";
 
 export const LocationPopup = ({ location }: { location: Location }) => {
   const { selectLocation, addLocation, locations, removeLocation } = useTripContext();
-  const { title, image, description, category, address, site, phone, lat, long } = location;
+  const { title, image, description, address, site, phone, latitude, longitude } = location;
   const isLastLocationVisited = locations[locations.length - 1]?.isVisited;
 
   return (
@@ -26,14 +26,13 @@ export const LocationPopup = ({ location }: { location: Location }) => {
         </div>
         <div>
           <h3 className="text-lg font-bold">{title}</h3>
-          <p className="text-sm text-gray-500">{description}</p>
+          <p className="text-sm text-gray-500">
+            {description.length > 100 ? `${description.slice(0, 200)}...` : description}
+          </p>
         </div>
       </div>
 
-      <div className="my-4">
-        <span className="badge bg-gray-300 text-gray-500 border-none">{category}</span>
-      </div>
-      <p className="text-sm">
+      <p className="text-sm mt-4">
         <span className="font-bold">Address:</span> {address}
       </p>
       {phone && (
@@ -74,7 +73,7 @@ export const LocationPopup = ({ location }: { location: Location }) => {
         )}
         <a
           className="btn btn-ghost btn-sm"
-          href={`https://www.google.com/maps/dir/?api=1&destination=${lat},${long}`}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`}
           target="_blank"
           rel="noreferrer"
         >

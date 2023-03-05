@@ -65,7 +65,7 @@ export const MapSidebar = () => {
       </div>
       <div
         className={cn(
-          "max-w-screen-sm w-full bg-white absolute z-40 shadow-xl h-screen max-h-screen transition-all py-4 px-8 overflow-y-auto",
+          "max-w-screen-sm w-full bg-white absolute z-40 shadow-xl h-screen max-h-screen transition-all py-4 px-8 overflow-y-auto custom-scrollbar",
           {
             "left-16": isSidebarOpen,
             "-left-full": !isSidebarOpen,
@@ -78,12 +78,14 @@ export const MapSidebar = () => {
               className="text-3xl font-bold  outline-1 py-2 px-1 outline-green-200 rounded-lg hover:outline"
               title="Edit trip name"
               contentEditable
+              suppressContentEditableWarning={true}
             >
               Trip #1
             </h1>
             <p
               className="mt-2 outline-1 py-2 px-1 outline-green-200 rounded-lg hover:outline"
               contentEditable
+              suppressContentEditableWarning={true}
             >
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quod, voluptate,
               quia, voluptates quas voluptatibus quibusdam
@@ -121,9 +123,17 @@ export const MapSidebar = () => {
               <p className="text-gray-500 my-2">Email: {user?.email}</p>
             </div>
 
-            <button onClick={logout} className="btn btn-sm">
-              Logout
-            </button>
+            <div className="flex space-x-2">
+              <Link
+                href={{ pathname: "/form", query: { step: 0 } }}
+                className="btn btn-sm btn-outline"
+              >
+                Reset preferences
+              </Link>
+              <button onClick={logout} className="btn btn-sm ">
+                Logout
+              </button>
+            </div>
           </div>
         )}
       </div>

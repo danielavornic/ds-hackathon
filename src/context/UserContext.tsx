@@ -1,3 +1,4 @@
+import { useFormContext, useTripContext } from "@/hooks";
 import { useRouter } from "next/router";
 import React, { createContext, useReducer, useEffect } from "react";
 
@@ -72,13 +73,37 @@ const userReducer = (state: UserState, action: UserAction): UserState => {
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(userReducer, initialUserState);
   const router = useRouter();
+  const { addRecommendations } = useTripContext();
+  const { resetForm } = useFormContext();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      dispatch({ type: "SET_USER", payload: JSON.parse(user) });
+    const getUserRecommendations = async (userId: any) => {
+      try {
+        const response = await fetch("/api/recommendations", {
+          method: "GET",
+          credentials: "include",
+          body: JSON.stringify({ "user-id": userId }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          addRecommendations(data.recommendations);
+        }
+      } catch (error) {
+        dispatch({ type: "SET_ERROR", payload: "Error fetching recommendations" });
+      }
+    };
+
+    const initializeUser = async () => {
+      const user = localStorage.getItem("user");
+      if (user) {
+        dispatch({ type: "SET_USER", payload: JSON.parse(user) });
+        await getUserRecommendations(JSON.parse(user).id);
+      }
       dispatch({ type: "CLEAR_ERROR" });
-    }
+    };
+
+    initializeUser();
   }, []);
 
   useEffect(() => {
@@ -135,6 +160,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         router.push({ pathname: "/trip", query: { tab: "profile" } });
         localStorage.setItem("user", JSON.stringify({ email, id: data.id }));
 
+        addRecommendations(data.recommendations);
         dispatch({ type: "CLEAR_ERROR" });
       } else {
         dispatch({ type: "SET_ERROR", payload: "Invalid email or password" });
@@ -163,12 +189,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           type: "SET_USER",
           payload: {
             email,
-            id: data.id,
+            id: data["user-id"],
           },
         });
 
         router.push("/welcome");
-        localStorage.setItem("user", JSON.stringify({ email, id: data.id }));
+        localStorage.setItem("user", JSON.stringify({ email, id: data["user-id"] }));
 
         dispatch({ type: "CLEAR_ERROR" });
       }
@@ -182,10 +208,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = async () => {
-    router.push("/");
+    window.location.href = "/";
     dispatch({ type: "SET_USER", payload: null });
     localStorage.removeItem("user");
     dispatch({ type: "CLEAR_ERROR" });
+    resetForm();
 
     // dispatch({ type: "SET_LOADING", payload: true });
 

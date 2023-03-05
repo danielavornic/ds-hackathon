@@ -2,110 +2,23 @@ import { useRouter } from "next/router";
 import { createContext, useEffect, useReducer, useState } from "react";
 
 import { Question } from "@/types";
+import { questions } from "@/data";
+import { useTripContext } from "@/hooks";
 
 type FormContext = {
   questions: Question[];
   currentStep: number;
   setAnswer: (questionId: string, answer: string | string[]) => void;
+  sendForm: (form: any) => void;
+  resetForm: () => void;
 };
 
 const initialState: FormContext = {
-  questions: [
-    {
-      id: "0",
-      title: "Which factors motivated you to visit Republic of Moldova?",
-      options: [
-        {
-          value: "1",
-          label: "I have family or friends in Moldova",
-        },
-        {
-          value: "2",
-          label: "I have a business interest in Moldova",
-        },
-        {
-          value: "3",
-          label: "I am a student",
-        },
-      ],
-      img: "https://www.nationsonline.org/gallery/Moldova/Old-Orhei-Moldova.jpg",
-      type: "checkbox",
-      required: true,
-    },
-    {
-      id: "1",
-      title: "What is your age?",
-      options: [
-        {
-          value: "1",
-          label: "18-24",
-        },
-        {
-          value: "2",
-          label: "25-34",
-        },
-        {
-          value: "3",
-          label: "35-44",
-        },
-        {
-          value: "4",
-          label: "45-54",
-        },
-        {
-          value: "5",
-          label: "55-64",
-        },
-        {
-          value: "6",
-          label: "65+",
-        },
-        // {
-        //   value: "",
-        //   label: "Other",
-        //   isOther: true,
-        // },
-      ],
-      hasCustomOption: true,
-      img: "https://www.nationsonline.org/gallery/Moldova/Old-Orhei-Moldova.jpg",
-      type: "radio",
-      required: true,
-    },
-    {
-      id: "2",
-      title: "3rd question?",
-      options: [
-        {
-          value: "1",
-          label: "18-24",
-        },
-        {
-          value: "2",
-          label: "25-34",
-        },
-        {
-          value: "3",
-          label: "35-44",
-        },
-        {
-          value: "4",
-          label: "45-54",
-        },
-        {
-          value: "5",
-          label: "55-64",
-        },
-        {
-          value: "6",
-          label: "65+",
-        },
-      ],
-      img: "https://www.nationsonline.org/gallery/Moldova/Old-Orhei-Moldova.jpg",
-      type: "radio",
-    },
-  ],
+  questions,
   currentStep: 0,
   setAnswer: () => null,
+  sendForm: () => null,
+  resetForm: () => null,
 };
 
 export const FormContext = createContext<FormContext>(initialState);
@@ -124,6 +37,15 @@ const formReducer = (state: FormContext, action: any) => {
         questions: [...state.questions],
       };
     }
+    case "RESET_FORM": {
+      return {
+        ...state,
+        questions: state.questions.map((question) => {
+          question.answer = [""];
+          return question;
+        }),
+      };
+    }
     default: {
       return state;
     }
@@ -134,6 +56,7 @@ export const FormProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
+  const { addRecommendations } = useTripContext();
 
   useEffect(() => {
     if (router.query.step) {
@@ -150,11 +73,35 @@ export const FormProvider = ({ children }: any) => {
     }
   }, [router.query.step]);
 
+  const sendForm = async (form: any) => {
+    try {
+      const reponse = await fetch("/api/user-form", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (reponse.ok) {
+        router.push({ pathname: "/trip", query: { tab: "map" } });
+        const data = await reponse.json();
+        addRecommendations(data.recommendations);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <FormContext.Provider
       value={{
         ...state,
+        sendForm,
         currentStep,
+        resetForm: () => {
+          dispatch({ type: "RESET_FORM" });
+        },
         setAnswer: (questionId: string, answer: string | string[]) => {
           dispatch({
             type: "SET_ANSWER",

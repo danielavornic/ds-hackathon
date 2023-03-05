@@ -10,11 +10,11 @@ const welcome = () => {
   const router = useRouter();
   const { user } = useUserContext();
 
-  useEffect(() => {
-    if (user) {
-      router.push("/trip");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push("/trip");
+  //   }
+  // }, [user]);
 
   return (
     <Layout title="Welcome">
@@ -26,7 +26,10 @@ const welcome = () => {
           We need to know a few things about you to get started. Lorem ipsum dolor sit, amet
           consectetur adipisicing elit. Quisquam, quos repudiandae. saepe velit quia.
         </p>
-        <Link href="/form" className="btn btn-primary mt-4 mb-10 btn-lg text-xl">
+        <Link
+          href={{ pathname: "/form", query: { step: "0" } }}
+          className="btn btn-primary mt-4 mb-10 btn-lg text-xl"
+        >
           Get started
         </Link>
         <div

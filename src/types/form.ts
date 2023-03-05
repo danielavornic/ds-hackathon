@@ -9,7 +9,7 @@ export interface Question {
   id: string;
   title: string;
   required?: boolean;
-  type?: QuestionType;
+  type?: string;
   options: Option[];
   answer?: string[];
   img?: string;

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "1",
+    "title": "Which statement is more appropriate to you?",
+    "options": [
+      {
+        "value": "Group visitor (organized by an agency/ tour-operator)",
+        "label": "Group visitor (organized by an agency/ tour-operator)"
+      },
+      {
+        "value": "Individual (backpacker) – planned trip alone",
+        "label": "Individual (backpacker) – planned trip alone"
+      },
+      { "value": "Business tourism", "label": "Business tourism" },
+      {
+        "value": "Moldovan diaspora who traveled in Moldova",
+        "label": "Moldovan diaspora who traveled in Moldova"
+      }
+    ],
+    "img": "https://www.nationsonline.org/gallery/Moldova/Old-Orhei-Moldova.jpg",
+    "type": "radio",
+    "hasCustomOption": false,
+    "required": true
+  },
+  {
+    "id": "2",
+    "title": "Tell me please, how was your trip to Moldova organized/ Who organized your trip?",
+    "options": [
+      {
+        "value": "Via a Moldavian-based travel agency/ tour operator",
+        "label": "Via a Moldavian-based travel agency/ tour operator"
+      },
+      {
+        "value": "Via a foreign travel agency/ tour operator (e.g. in tourist's home country)",
+        "label": "Via a foreign travel agency/ tour operator (e.g. in tourist's home country)"
+      },
+      { "value": "Myself", "label": "Myself" },
+      { "value": "Family members/ friends", "label": "Family members/ friends" },
+      { "value": "My business/ company/partners", "label": "My business/ company/partners" }
+    ],
+    "type": "radio",
+    "img": "https://images.musement.com/cover/0095/23/chisinau-jpeg_header-9422424.jpeg?w=1200&h=630&q=95&fit=crop",
+    "hasCustomOption": true,
+    "required": true
+  },
+  {
+    "id": "3",
+    "title": "Please tell me how easy or hard is to arrange visits, tours or excursions. \nPlease respond using a scale from 1 to 5, where 1 \u2013 very difficult and 5 \u2013 very                     easy",
+    "options": [
+      { "value": "1", "label": "1" },
+      { "value": "2", "label": "2" },
+      { "value": "3", "label": "3" },
+      { "value": "4", "label": "4" },
+      { "value": "5", "label": "5" },
+      { "value": "Don't know / Refuse to answer", "label": "Don't know / Refuse to answer" }
+    ],
+    "hasCustomOption": true,
+    "type": "radio",
+    "img": "https://descopera.md/wp-content/uploads/2021/11/castel-mimi.jpeg",
+    "required": true
+  },
+  {
+    "id": "4",
+    "title": "What motivates you to visit the Republic of Moldova?",
+    "options": [
+      {
+        "label": "It is not a well-known country",
+        "value": "It is not a well-known country"
+      },
+      {
+        "label": "It is a country that comes from the Soviet Union",
+        "value": "It is a country that comes from the Soviet Union"
+      },
+      {
+        "label": "It is cheap to visit Moldova",
+        "value": "It is cheap to visit Moldova"
+      },
+      {
+        "label": "It is a country with a very low risk of terrorist attacks",
+        "value": "It is a country with a very low risk of terrorist attacks"
+      },
+      {
+        "label": "I have seen pictures on the internet and I was struck by their beauty",
+        "value": "I have seen pictures on the internet and I was struck by their beauty"
+      },
+      {
+        "label": "Friends / acquaintances told me good things about Moldova, I was intrigued",
+        "value": "Friends / acquaintances told me good things about Moldova, I was intrigued"
+      },
+      {
+        "label": "I read in the Internet / I heard that RM keeps the traditions and customs of ancestors",
+        "value": "I read in the Internet / I heard that RM keeps the traditions and customs of ancestors"
+      },
+      {
+        "label": "I heard that in Moldova are organized various festivals, including the wine festival",
+        "value": "I heard that in Moldova are organized various festivals, including the wine festival"
+      },
+      {
+        "label": "I wanted to taste Moldovan wine",
+        "value": "I wanted to taste Moldovan wine"
+      },
+      {
+        "label": "I wanted to visit Moldovan wineries and cellars",
+        "value": "I wanted to visit Moldovan wineries and cellars"
+      },
+      {
+        "label": "I wanted to visit monuments (fortress, natural monuments, etc.)",
+        "value": "I wanted to visit monuments (fortress, natural monuments, etc.)"
+      },
+      {
+        "label": "I wanted to see rural life",
+        "value": "I wanted to see rural life"
+      },
+      {
+        "label": "Lately RM is more publicized in the international media, so I was curious to visit",
+        "value": "Lately RM is more publicized in the international media, so I was curious to visit"
+      },
+      {
+        "label": "Don't know / Refuse to answer",
+        "value": "Don't know / Refuse to answer"
+      }
+    ],
+    "type": "checkbox",
+    "hasCustomOption": false,
+    "required": true,
+    "img": "https://img.itinari.com/page/content/original/104e7f82-e49f-4060-8fc8-effc2f44e1cc-gipsy-hole-saharna.jpg?ch=DPR&dpr=2.625&w=994&s=22e3af40e684607e82303af2c809f36b"
+  }
+]

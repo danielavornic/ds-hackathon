@@ -2,13 +2,23 @@ import Link from "next/link";
 import cn from "classnames";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
-import { useFormContext } from "@/hooks";
+import { useFormContext, useUserContext } from "@/hooks";
 
 export const FormNav = () => {
-  const { questions, currentStep } = useFormContext();
+  const { questions, currentStep, sendForm, resetForm } = useFormContext();
+  const { user } = useUserContext();
 
   const handleFinish = () => {
-    // TODO: handle finish request
+    const form = {
+      "user-id": user ? user.id : null,
+      criterion_1: questions[0].answer?.[0],
+      criterion_2: questions[1].answer?.[0],
+      criterion_3: questions[2].answer?.[0],
+      criterion_4: questions[3].answer?.[0],
+    };
+
+    sendForm(form);
+    resetForm();
   };
 
   return (

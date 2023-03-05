@@ -5,7 +5,7 @@ export const QuestionCard = () => {
   const question = questions[currentStep];
 
   return (
-    <div className="card max-w-screen-lg mx-auto shadow">
+    <div className="card max-w-screen-lg mx-auto shadow whitespace-pre-line">
       <div
         className="h-[200px] bg-gray-200 rounded-t-2xl bg-cover bg-center"
         style={{ backgroundImage: `url(${question?.img})` }}

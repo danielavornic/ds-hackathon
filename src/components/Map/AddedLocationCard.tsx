@@ -30,7 +30,11 @@ export const AddedLocationCard = ({ location, index }: { location: Location; ind
         <h3 className="text-lg font-bold mb-2">
           {index + 1}. {location.title}
         </h3>
-        <p className="text-sm text-gray-500">{location.description}</p>
+        <p className="text-sm text-gray-500">
+          {location.description.length > 230
+            ? `${location.description.slice(0, 230)}...`
+            : location.description}
+        </p>
 
         {review && status === "reviewed" && (
           <div tabIndex={0} className="collapse p-0 mt-2">
