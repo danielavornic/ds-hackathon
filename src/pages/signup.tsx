@@ -1,14 +1,17 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Image from "next/image";
 import Link from "next/link";
-import { Formik } from "formik";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
+import { useUserContext } from "@/hooks";
 import { Layout } from "@/components";
 
 const signup = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
+  const { user, signup, error } = useUserContext();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -19,6 +22,12 @@ const signup = () => {
       .oneOf([Yup.ref("password"), null as any], "Passwords must match")
       .required("Confirm password is required"),
   });
+
+  useEffect(() => {
+    if (user) {
+      router.push("/trip");
+    }
+  }, [user]);
 
   return (
     <Layout title="Sign up">
@@ -35,18 +44,39 @@ const signup = () => {
           </div>
           <div className="-ml-48 bg-white w-full card shadow-md dark:border md:mt-0 sm:max-w-lg xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create your account
-              </h1>
-              <p className="text-gray-500 dark:text-gray-400">
-                Enter your details below and start your journey with us.
-              </p>
+              <div>
+                <h1 className="mb-2 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Create your account
+                </h1>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Enter your details below and start your journey with us.
+                </p>
+                {error && (
+                  <div className="alert alert-error mt-4 p-2 bg-red-300 rounded-lg">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>{error}</span>
+                    </div>
+                  </div>
+                )}{" "}
+              </div>
               <Formik
                 initialValues={{ email: "", password: "", confirmPassword: "" }}
                 onSubmit={(values, { setSubmitting }) => {
-                  // console.log(values);
+                  signup(values.email, values.password);
                   setSubmitting(false);
-                  router.push("/welcome");
                 }}
                 validationSchema={validationSchema}
               >

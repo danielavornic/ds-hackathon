@@ -1,12 +1,25 @@
+import { useEffect } from "react";
 import Head from "next/head";
-import { Inter } from "@next/font/google";
-import { Layout } from "@/components";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { Inter } from "@next/font/google";
 import { FiArrowRight, FiBook } from "react-icons/fi";
+
+import { useUserContext } from "@/hooks";
+import { Layout } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const router = useRouter();
+  const { user } = useUserContext();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/trip");
+    }
+  }, [user]);
+
   return (
     <>
       <Head>

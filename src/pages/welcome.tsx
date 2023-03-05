@@ -1,7 +1,21 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+import { useUserContext } from "@/hooks";
 import { Layout } from "@/components";
 
 const welcome = () => {
+  const router = useRouter();
+  const { user } = useUserContext();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/trip");
+    }
+  }, [user]);
+
   return (
     <Layout title="Welcome">
       <div className="container mx-auto flex flex-col items-center justify-center pb-14 h-full min-h-[calc(100vh-120px)]">

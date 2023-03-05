@@ -30,10 +30,10 @@ export const LocationPopup = ({ location }: { location: Location }) => {
         </div>
       </div>
 
-      <div className="mt-4">
+      <div className="my-4">
         <span className="badge bg-gray-300 text-gray-500 border-none">{category}</span>
       </div>
-      <p className="mt-2 text-sm">
+      <p className="text-sm">
         <span className="font-bold">Address:</span> {address}
       </p>
       {phone && (

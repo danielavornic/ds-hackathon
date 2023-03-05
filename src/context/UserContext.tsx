@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
 import React, { createContext, useReducer, useEffect } from "react";
 
 type User = {
   id: number;
   email: string;
-  token: string;
+  // token: string;
 };
 
 type UserState = {
@@ -31,7 +32,7 @@ const initialUserState: UserState = {
   loading: false,
 };
 
-const UserContext = createContext<UserContextProps>({
+export const UserContext = createContext<UserContextProps>({
   ...initialUserState,
   login: () => Promise.resolve(),
   logout: () => null,
@@ -70,30 +71,39 @@ const userReducer = (state: UserState, action: UserAction): UserState => {
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(userReducer, initialUserState);
+  const router = useRouter();
 
   useEffect(() => {
-    const checkSession = async () => {
-      dispatch({ type: "SET_LOADING", payload: true });
-
-      try {
-        const response = await fetch("/api/session", {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          dispatch({ type: "SET_USER", payload: data.user });
-        } else {
-          dispatch({ type: "SET_ERROR", payload: "Error checking session" });
-        }
-      } catch (error) {
-        dispatch({ type: "SET_ERROR", payload: "Error checking session" });
-      }
-    };
-
-    checkSession();
+    const user = localStorage.getItem("user");
+    if (user) {
+      dispatch({ type: "SET_USER", payload: JSON.parse(user) });
+      dispatch({ type: "CLEAR_ERROR" });
+    }
   }, []);
+
+  // useEffect(() => {
+  //   const checkSession = async () => {
+  //     dispatch({ type: "SET_LOADING", payload: true });
+
+  //     try {
+  //       const response = await fetch("/api/session", {
+  //         method: "GET",
+  //         credentials: "include",
+  //       });
+
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         dispatch({ type: "SET_USER", payload: data.user });
+  //       } else {
+  //         dispatch({ type: "SET_ERROR", payload: "Error checking session" });
+  //       }
+  //     } catch (error) {
+  //       dispatch({ type: "SET_ERROR", payload: "Error checking session" });
+  //     }
+  //   };
+
+  //   checkSession();
+  // }, []);
 
   const login = async (email: string, password: string) => {
     dispatch({ type: "SET_LOADING", payload: true });
@@ -110,7 +120,18 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (response.ok) {
         const data = await response.json();
-        dispatch({ type: "SET_USER", payload: data.user });
+        dispatch({
+          type: "SET_USER",
+          payload: {
+            email,
+            id: data.id,
+          },
+        });
+
+        router.push({ pathname: "/trip", query: { tab: "profile" } });
+        localStorage.setItem("user", JSON.stringify({ email, id: data.id }));
+
+        dispatch({ type: "CLEAR_ERROR" });
       } else {
         dispatch({ type: "SET_ERROR", payload: "Invalid email or password" });
       }
@@ -123,7 +144,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: "SET_LOADING", payload: true });
 
     try {
-      const response = await fetch("/api/signup", {
+      const response = await fetch("/api/registration", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -134,15 +155,22 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (response.ok) {
         const data = await response.json();
-        dispatch({ type: "SET_USER", payload: data.user });
+        dispatch({
+          type: "SET_USER",
+          payload: {
+            email,
+            id: data.id,
+          },
+        });
+
+        router.push("/welcome");
+        localStorage.setItem("user", JSON.stringify({ email, id: data.id }));
+
+        dispatch({ type: "CLEAR_ERROR" });
       }
 
       if (response.status === 409) {
-        dispatch({ type: "SET_ERROR", payload: "Email already in use" });
-      }
-
-      if (response.status === 400) {
-        dispatch({ type: "SET_ERROR", payload: "Invalid email or password" });
+        dispatch({ type: "SET_ERROR", payload: "User already registered." });
       }
     } catch (error) {
       dispatch({ type: "SET_ERROR", payload: "Error signing up" });
@@ -150,22 +178,27 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = async () => {
-    dispatch({ type: "SET_LOADING", payload: true });
+    dispatch({ type: "SET_USER", payload: null });
+    router.push("/");
+    localStorage.removeItem("user");
+    dispatch({ type: "CLEAR_ERROR" });
 
-    try {
-      const response = await fetch("/api/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+    // dispatch({ type: "SET_LOADING", payload: true });
 
-      if (response.ok) {
-        dispatch({ type: "SET_USER", payload: null });
-      } else {
-        dispatch({ type: "SET_ERROR", payload: "Error logging out" });
-      }
-    } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Error logging out" });
-    }
+    // try {
+    //   const response = await fetch("/api/logout", {
+    //     method: "POST",
+    //     credentials: "include",
+    //   });
+
+    //   if (response.ok) {
+    //     dispatch({ type: "SET_USER", payload: null });
+    //   } else {
+    //     dispatch({ type: "SET_ERROR", payload: "Error logging out" });
+    //   }
+    // } catch (error) {
+    //   dispatch({ type: "SET_ERROR", payload: "Error logging out" });
+    // }
   };
 
   const clearError = () => {

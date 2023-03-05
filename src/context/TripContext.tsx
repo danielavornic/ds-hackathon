@@ -122,6 +122,7 @@ const tripReducer = (state: TripContext, action: any) => {
       };
     }
     case "ADD_LOCATION": {
+      // TODO: send to backend for recommendations
       return {
         ...state,
         locations: [...state.locations, action.payload],

@@ -7,6 +7,10 @@ import { useFormContext } from "@/hooks";
 export const FormNav = () => {
   const { questions, currentStep } = useFormContext();
 
+  const handleFinish = () => {
+    // TODO: handle finish request
+  };
+
   return (
     <div className="bg-white w-full h-14 px-6 py-2 flex justify-center text-gray-font fixed bottom-0 shadow-lg z-40 border-t border-gray-99">
       <div className="container mx-auto flex justify-center items-center">
@@ -25,6 +29,7 @@ export const FormNav = () => {
               ? "/trip"
               : { pathname: "/form", query: { step: currentStep + 1 } }
           }
+          onClick={currentStep === questions.length - 1 ? handleFinish : undefined}
           className={cn("btn btn-primary btn-sm", {
             "opacity-50 pointer-events-none":
               !questions[currentStep].answer?.filter((item) => !!item).length &&

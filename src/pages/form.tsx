@@ -1,12 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Layout, Form, FormNav } from "@/components";
-import { useFormContext } from "@/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+
+import { Layout, Form, FormNav } from "@/components";
+import { useFormContext, useUserContext } from "@/hooks";
 
 const form = () => {
   const { questions, currentStep } = useFormContext();
   const router = useRouter();
+  const { user } = useUserContext();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/trip");
+    }
+  }, [user]);
 
   useEffect(() => {
     if (currentStep >= questions.length || currentStep < 0) {
