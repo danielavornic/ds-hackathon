@@ -81,6 +81,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  useEffect(() => {
+    dispatch({ type: "CLEAR_ERROR" });
+  }, [router.pathname]);
+
   // useEffect(() => {
   //   const checkSession = async () => {
   //     dispatch({ type: "SET_LOADING", payload: true });
@@ -178,8 +182,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = async () => {
-    dispatch({ type: "SET_USER", payload: null });
     router.push("/");
+    dispatch({ type: "SET_USER", payload: null });
     localStorage.removeItem("user");
     dispatch({ type: "CLEAR_ERROR" });
 
