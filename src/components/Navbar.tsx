@@ -32,7 +32,7 @@ export const Navbar = () => {
             </ul>
           </div>
           <Link href="/" className="text-xl font-bold">
-            App Name
+            MOLDVISE
           </Link>
         </div>
         <div className="navbar-end">

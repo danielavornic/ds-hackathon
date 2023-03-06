@@ -19,7 +19,7 @@ export const Layout = ({
   return (
     <>
       <Head>
-        <title>{title ? `${title} | App Name` : "App Name"}</title>
+        <title>{title ? `${title} | MOLDVISE` : "MOLDVISE"}</title>
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

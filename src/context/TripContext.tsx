@@ -110,7 +110,7 @@ const tripReducer = (state: TripContext, action: any) => {
       };
     }
     case "ADD_RECOMMENDATIONS": {
-      const filteredLocations = action.payload.filter(
+      const filteredLocations = action.payload?.filter(
         (location: any) => !state.locations.some((l) => l.id === location.id),
       );
       const filteredRecommendedLocations = state.recommendedLocations.filter(
@@ -118,7 +118,7 @@ const tripReducer = (state: TripContext, action: any) => {
       );
       return {
         ...state,
-        recommendedLocations: [...filteredRecommendedLocations, ...filteredLocations],
+        recommendedLocations: [...filteredRecommendedLocations, ...(filteredLocations || [])],
       };
     }
     case "ADD_LOCATION": {

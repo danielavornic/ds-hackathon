@@ -43,7 +43,7 @@ const signup = () => {
                   Create your account
                 </h1>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Enter your details below and start your journey with us.
+                  Enter your details below and start your journey with MOLDOVISE.
                 </p>
                 {error && (
                   <div className="alert alert-error mt-4 p-2 bg-red-300 rounded-lg">

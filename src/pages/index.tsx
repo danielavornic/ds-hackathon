@@ -32,11 +32,12 @@ export default function Home() {
         <section className="bg-white dark:bg-gray-900 hero mt-8 mb-12">
           <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
             <h1 className="mb-6 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-              We invest in the world’s potential
+              Discover the routes of life
             </h1>
             <p className="mb-10 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-              Here at Flowbite 🇲🇩 we focus on markets where technology, innovation, and capital can
-              unlock longitude-term value and drive economic growth.
+              <b>MOLDVISE</b> focuses on the richness of Moldovan heritage, culture and beauty. We
+              provide a platform for people to discover personalized landmarks based on their
+              preferences in order to create a unique experience.
             </p>
             <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
               <Link href="/signin" className="btn btn-primary text-base">
@@ -49,7 +50,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="mockup-window border border-base-300">
-              <div className="flex justify-center px-4 py-48 border-t border-base-300">Hello!</div>
+              <div className="flex justify-center px-4 py-48 border-t border-base-300">_</div>
             </div>
           </div>
         </section>

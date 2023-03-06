@@ -45,7 +45,7 @@ const signin = () => {
                   Sign in to your account
                 </h1>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Enter your credentials below and continue your journey with us.
+                  Enter your credentials below and continue your journey with MOLDVISE.
                 </p>
                 {error && (
                   <div className="alert alert-error mt-4 p-2 bg-red-300 rounded-lg">

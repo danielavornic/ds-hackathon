@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from "classnames";
-import { FiMap } from "react-icons/fi";
+import { FiMap, FiShare2 } from "react-icons/fi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { useTripContext, useUserContext } from "@/hooks";
@@ -28,7 +28,11 @@ export const MapSidebar = () => {
               })
             }
           >
-            <div className="bg-primary text-neutral-content rounded-full w-10">
+            <div
+              className={cn("bg-neutral-focus text-neutral-content rounded-full w-10", {
+                "bg-primary": tab === "profile",
+              })}
+            >
               <span className="text-xl">{user?.email?.charAt(0).toUpperCase()}</span>
             </div>
           </label>
@@ -47,7 +51,7 @@ export const MapSidebar = () => {
             className="text-2xl font-bold text-green-500 flip-vertical"
             style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}
           >
-            AppName
+            MOLDVISE
           </Link>
         </div>
         <div>
@@ -74,21 +78,27 @@ export const MapSidebar = () => {
       >
         {tab === "map" && (
           <>
-            <h1
-              className="text-3xl font-bold  outline-1 py-2 px-1 outline-green-200 rounded-lg hover:outline"
-              title="Edit trip name"
-              contentEditable
-              suppressContentEditableWarning={true}
-            >
-              Trip #1
-            </h1>
+            <div className="flex justify-between items-center">
+              <h1
+                className="text-3xl font-bold outline-1 py-2 px-1 outline-green-200 rounded-lg hover:outline"
+                title="Edit trip name"
+                contentEditable
+                suppressContentEditableWarning={true}
+              >
+                Trip #1
+              </h1>
+
+              <button className="btn btn-sm btn-outline btn-primary btn-square w-[36px] h-[36px]">
+                <FiShare2 />
+              </button>
+            </div>
             <p
               className="mt-2 outline-1 py-2 px-1 outline-green-200 rounded-lg hover:outline"
               contentEditable
               suppressContentEditableWarning={true}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quod, voluptate,
-              quia, voluptates quas voluptatibus quibusdam
+              This is the description of the trip. You can edit it by clicking on it. Browse the map
+              or select a recommended location below to add it to your new trip to Moldova.
             </p>
 
             <h2 className="text-2xl font-bold mt-8 px-1 mb-4">Places to visit</h2>
